@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = ["张三", "李四", "王五", "麻溜"];
+      let [name1, name2, name3, name4] = arr;
+      console.log(name1, name2, name3, name4);
+      let obj = {
+        name: "xiaoming",
+        age: 20,
+        say() {
+          console.log(this.name);
+        },
+      };
+      let { name, age, say } = obj;
+      //   console.log(name, age, say);
+      say();
+    </script>
+  </body>
+</html>

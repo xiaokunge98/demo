@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="list"></div>
+    <script type="text/javascript">
+      /*兼容性问题
+        ev||event
+        鼠标滚轮
+        事件绑定
+        offsetParent*/
+      //1、offsetParent
+      //01、父级是否有定位（4种）
+      //02、本身是否有定位（4种）
+      //03、浏览器种类（6种）
+
+      //  结论
+      /*
+            1、本身为fixed
+                ==>offsetParent:null（不是火狐：firefox）
+                    最终参照body
+                ==>offsetParent:body（火狐：firefox）
+            2、本身定位不为fixed
+                ①：父级没有定位
+                    ==>offsetParent:body
+                ②：父级有定位
+                    ==>offsetParent:定位父级
+        */
+    </script>
+  </body>
+</html>

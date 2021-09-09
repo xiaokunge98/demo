@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>简易计算器</title>
+  </head>
+  <body>
+    <input id="num1" />
+    <select id="select">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+      <option value="%">%</option>
+    </select>
+    <input id="num2" />
+    <button onclick="cacle()">计算</button>
+    <p id="result"></p>
+    <script>
+      var inp1 = document.getElementById("num1");
+      var inp2 = document.getElementById("num2");
+      var select = document.getElementById("select");
+      function cacle() {
+        var num1 = parseFloat(inp1.value);
+        var num2 = parseFloat(inp2.value);
+        var flag = true; //用来存储是否为数字的控制
+        var result = "ERROR:";
+        // 判断是不是数字
+        if (isNaN(num1)) {
+          result = result + "第一个不是一个数字！#";
+          flag = false;
+        }
+        if (isNaN(num2)) {
+          result = result + "第二个不是一个数字！";
+          flag = false;
+        }
+        if (flag) {
+          switch (select.value) {
+            case "+":
+              result =
+                "结果是：" + num1 + "+" + num2 + "=" + Number(num1 + num2);
+              break;
+            case "-":
+              result =
+                "结果是：" + num1 + "-" + num2 + "=" + Number(num1 - num2);
+              break;
+            case "*":
+              result =
+                "结果是：" + num1 + "*" + num2 + "=" + Number(num1 * num2);
+              break;
+            case "/":
+              // 除数不能为零判断
+              if (num2 == 0) {
+                result = result + "除数不能为零";
+              } else {
+                result =
+                  "结果是：" + num1 + "/" + num2 + "=" + Number(num1 / num2);
+              }
+              break;
+            case "%":
+              // 除数不能为零判断
+              if (num2 === 0) {
+                result = result + "求余数不能为零";
+              } else {
+                result =
+                  "结果是：" + num1 + "%" + num2 + "=" + Number(num1 % num2);
+              }
+              break;
+          }
+        }
+        document.getElementById("result").innerHTML = result;
+      }
+    </script>
+  </body>
+</html>

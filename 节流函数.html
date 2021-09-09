@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="ipt" />
+    <button id="btn">click</button>
+    <script>
+      let btn = document.getElementById("btn");
+      let ipt = document.getElementById("ipt");
+      btn.addEventListener("click", function () {
+        liu(3000);
+      });
+      function jiliu() {
+        var oldTime = Date.parse(new Date());
+        return function (wait) {
+          var newTime = Date.parse(new Date());
+          if (newTime - oldTime >= wait) {
+            console.log(ipt.value);
+            oldTime = Date.parse(new Date());
+          }
+        };
+      }
+      let liu = jiliu();
+    </script>
+  </body>
+</html>

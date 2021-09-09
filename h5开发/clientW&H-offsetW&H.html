@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" style="margin: 20px">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="inner">
+      <div class="inner1"></div>
+    </div>
+    <script>
+      /*
+            clientWidth和clientHeight
+                该宽度和高度为可视窗口的宽高
+            offsetWidth和offsetHeight
+                该宽高为border-box盒子的宽高
+        */
+      window.onload = function () {
+        let w = document.documentElement.clientWidth;
+        let wo = document.documentElement.offsetWidth;
+        console.log(w, wo);
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="style.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+    <section id="wrap">
+      <!-- 1、头部 -->
+      <header id="head">
+        <div class="headMain clearfix">
+          <!-- logo图 -->
+          <div class="logo">
+            <a href="javascript:;"><img width="50px" src="./image/1.jpg" /></a>
+          </div>
+          <!-- 导航栏 -->
+          <nav>
+            <ul class="list">
+              <li>
+                <div class="up">
+                  <a href="javascript:;"
+                    ><img width="20px" src="./image/2.jpg"
+                  /></a>
+                </div>
+                <div class="down">
+                  <a href="javascript:;"
+                    ><img width="20px" src="./image/2.jpg"
+                  /></a>
+                </div>
+              </li>
+              <li>
+                <div class="up"><a href="javascript:;">Course</a></div>
+                <div class="down"><a href="javascript:;">Course</a></div>
+              </li>
+              <li>
+                <div class="up"><a href="javascript:;">Works</a></div>
+                <div class="down"><a href="javascript:;">Works</a></div>
+              </li>
+              <li>
+                <div class="up"><a href="javascript:;">Abount</a></div>
+                <div class="down"><a href="javascript:;">Abount</a></div>
+              </li>
+              <li>
+                <div class="up"><a href="javascript:;">Team</a></div>
+                <div class="down"><a href="javascript:;">Team</a></div>
+              </li>
+            </ul>
+          </nav>
+          <!-- 下拉条 -->
+          <div class="bar"></div>
+        </div>
+      </header>
+      <section id="content">
+        <ul class="list">
+          <li class="home">
+            <div>home</div>
+          </li>
+          <li class="course">
+            <div>course</div>
+          </li>
+          <li class="works">
+            <div>works</div>
+          </li>
+          <li class="about">
+            <div>about</div>
+          </li>
+          <li class="team">
+            <div>team</div>
+          </li>
+        </ul>
+      </section>
+    </section>
+  </body>
+  <script>
+    window.onload = function () {
+      // 1、获取dom元素
+      // head头部
+      var head = document.querySelector("#head");
+      // 箭头
+      var bar = document.querySelector(".bar");
+      // li
+      var li = document.querySelectorAll(".headMain>nav .list>li");
+      // up
+      var upNode = document.querySelectorAll(".headMain>nav .list>li .up");
+      var one = li[0];
+      // 内容content
+      var content = document.querySelector("#content");
+      var cLi = document.querySelectorAll("#content .list li");
+      // 内容ul
+      var cul = document.querySelector("#content .list");
+      console.log(cul);
+      // 小箭头位置
+      bar.style.left =
+        one.offsetLeft + one.offsetWidth / 2 - bar.offsetWidth / 2 + "px";
+      // 内容函数
+      var now = 0;
+      var timer;
+      // 滚轮滑动切换页面
+      if (content.addEventListener) {
+        content.addEventListener("DOMMouseScroll", function (ev) {
+          // 使用防抖防止用户滑动过快
+          if (timer) {
+            clearTimeout(timer);
+          }
+          timer = setTimeout(function () {
+            scrollFn(ev);
+          }, 100);
+        });
+      }
+      content.onmousewheel = function (ev) {
+        if (timer) {
+          clearTimeout(timer);
+        }
+        timer = setTimeout(function () {
+          scrollFn(ev);
+        }, 100);
+      };
+      function scrollFn(ev) {
+        var dir = "";
+        ev = ev || event;
+        if (ev.wheelDelta) {
+          dir = ev.wheelDelta > 0 ? "up" : "down";
+        } else if (ev.detail) {
+          dir = ev.detail < 0 ? "up" : "down";
+        }
+        switch (dir) {
+          case "up":
+            if (now > 0) {
+              now--;
+              move(now);
+            }
+            break;
+          case "down":
+            if (now < li.length - 1) {
+              now++;
+              move(now);
+            }
+            break;
+        }
+      }
+      window.onresize = function () {
+        /*1、视口中只能出现以屏 contentFun();、
+         2、点击时视口只能出现一屏
+         3、箭头位置重新计算*/
+        contentFun();
+        cul.style.top =
+          -now * (document.documentElement.clientHeight - head.offsetHeight) +
+          "px";
+        bar.style.left =
+          li[now].offsetLeft +
+          li[now].offsetWidth / 2 -
+          bar.offsetWidth / 2 +
+          "px";
+      };
+      // 内容区交互
+      contentFun();
+      function contentFun() {
+        content.style.height =
+          document.documentElement.clientHeight - head.offsetHeight + "px";
+        for (var i = 0; i < cLi.length; i++) {
+          cLi[i].style.height =
+            document.documentElement.clientHeight - head.offsetHeight + "px";
+        }
+      }
+      // 头部函数
+      headerFun();
+      function headerFun() {
+        for (var i = 0; i < li.length; i++) {
+          // 转绑i
+          li[i].index = i;
+          li[i].onclick = function () {
+            // up样式
+            now = this.index;
+            move(this.index);
+          };
+        }
+      }
+      // 头部公共函数
+      function move(nowIndex) {
+        for (var j = 0; j < upNode.length; j++) {
+          // 不要将width=‘0’,因为这样会给样式
+          upNode[j].style.width = "";
+        }
+        upNode[nowIndex].style.width = "100%";
+        bar.style.left =
+          li[nowIndex].offsetLeft +
+          li[nowIndex].offsetWidth / 2 -
+          bar.offsetWidth / 2 +
+          "px";
+        cul.style.top =
+          -nowIndex *
+            (document.documentElement.clientHeight - head.offsetHeight) +
+          "px";
+      }
+    };
+  </script>
+</html>

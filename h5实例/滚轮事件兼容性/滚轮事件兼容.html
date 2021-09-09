@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    div {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: chocolate;
+      margin: auto;
+    }
+  </style>
+  <body>
+    <div></div>
+  </body>
+  <script>
+    window.onload = function () {
+      var div = document.querySelector("div");
+      if (div.addEventListener) {
+        //  火狐
+        div.addEventListener("DOMMouseScroll", fn);
+      }
+      div.onmousewheel = fn;
+      function fn(ev) {
+        ev = ev || event;
+        var dir = "";
+        // 火狐
+        if (ev.detail) {
+          dir = ev.detail < 0 ? "up" : "down";
+        }
+        // 其它浏览器
+        if (ev.wheelDelta) {
+          dir = ev.wheelDelta > 0 ? "up" : "down";
+        }
+        console.log(dir);
+      }
+    };
+  </script>
+</html>

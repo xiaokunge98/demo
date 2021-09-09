@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    div {
+      width: 200px;
+      height: 200px;
+    }
+    .inner {
+      background-color: hotpink;
+      top: 50px;
+      left: 50px;
+      margin: 50px;
+      position: absolute;
+    }
+    .inner1 {
+      top: 100px;
+      left: 100px;
+      position: absolute;
+      background-color: indigo;
+    }
+  </style>
+  <body>
+    <div class="inner">
+      <div class="inner1"></div>
+    </div>
+    <script>
+      /*
+        1、元素的宽度和高度
+            width
+            height
+        2、元素左上角的相对位置
+            left
+            top
+        3、元素右下角的相对位置
+            right
+            bottom
+        */
+      window.onload = function () {
+        var pos = document.querySelector(".inner1");
+        let pare = pos.offsetParent;
+        var rect = pos.getBoundingClientRect();
+        console.log(pare, rect);
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //1、箭头函数的this是静态的，始终执行函数声明时所在作用域下的this值,箭头函数不能修改this指向
+      var name = "谢昆胜";
+      var obj = {
+        name: "万紫阳",
+      };
+      let fn1 = function () {
+        console.log(this.name);
+      };
+      let fn2 = () => {
+        console.log(this.name);
+      };
+      fn1();
+      fn2();
+      fn1.call(obj);
+      fn2.call(obj);
+      //2、箭头不能作为构造函数实例化对象
+      let Person = (name, age) => {
+        this.name = name;
+        this.age = age;
+      };
+      //   let p = new Person("谢昆胜", 24); //报错，Person is not a constructor
+      //   console.log(p());
+      //3、箭头函数不能使用arguments
+      let fun3 = (...ars) => {
+        // console.log(arguments); //会报错，arguments is not defined
+        console.log(ars);
+      };
+      fun3("1", "2", "3");
+      //4、当箭头函数只有一条执行语句时可以去掉大括号，去掉大括号后return也需要去掉，它会自动返回函数执行的返回值
+    </script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    div > img {
+      width: 64px;
+    }
+    div {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
+  <body>
+    <div>
+      <img src="./image/1.jpg" alt="" />
+      <img src="./image/2.jpg" alt="" />
+      <img src="./image/3.jpg" alt="" />
+      <img src="./image/4.jpg" alt="" />
+      <img src="./image/5.jpg" alt="" />
+    </div>
+  </body>
+  <script>
+    // postion 情况下盒子宽高为内容撑开的宽高，且margin居中失效。
+    //clientY 事件属性返回当事件被触发时鼠标指针向对于浏览器页面（客户区）的垂直坐标。 客户区指的是当前窗口。
+    window.onload = function () {
+      var r = 128;
+      var imgList = document.querySelectorAll("div>img");
+      console.log(document.documentElement.clientHeight);
+      document.onmousemove = function (ev) {
+        ev = ev || event;
+        for (let i = 0; i < imgList.length; i++) {
+          console.log(i);
+          var a =
+            imgList[i].getBoundingClientRect().left +
+            imgList[i].offsetWidth / 2 -
+            ev.clientX;
+          var b =
+            imgList[i].getBoundingClientRect().top +
+            imgList[i].offsetHeight / 2 -
+            ev.clientY;
+          var c = Math.sqrt(a * a + b * b);
+          if (c >= r) {
+            c = r;
+          }
+          imgList[i].style.width = 128 - c * 0.5 + "px";
+        }
+      };
+    };
+  </script>
+</html>

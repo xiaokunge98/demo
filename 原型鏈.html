@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Person(a) {
+        if (a) {
+          this.a = a;
+        }
+      }
+      Person.prototype.a = "1";
+      Object.prototype.b = "2";
+      var p = new Person();
+      // 先看构造函数Person使用定义a，没有则p.__proto__->Person.prototype,有就返回，
+      //没有就继续p.__proto__.__proto__->Person.prototype.__proto__->Object.prototype找，找到就返回，没找到返回undefined
+      //   console.log(p.a); //构造函数没有，则去p.__proto__->Person.prototype找到并返回1
+      //   console.log(p.b); //构造函数没有，则去p.__proto__->Person.prototype没找到，则去p.__proto__.__proto__->Person.prototype.__proto__->Object.prototype找到并返回2
+      //   console.log(Object.getPrototypeOf(p));
+      //   console.log(p.__proto__);
+      //   console.log(p.__proto__.__proto__ === Object.prototype);
+      //   console.log(Person.prototype.__proto__ === Object.prototype);
+      //   console.log(Person.prototype.constructor === Person);
+      //   console.log(Person.prototype);
+      //   console.log(p.__proto__.constructor);
+
+      //Person.pertotype是构造函数的实例原型。
+      //每个原型都有一个constructor属性，指向该关联的构造函数。
+      //   console.log(Person.prototype.constructor === Person);
+      function Son(a) {
+        if (a) {
+          this.a = a;
+        }
+      }
+      var son = new Son();
+      son = p;
+      Son.prototype.a = 1;
+      //console.log(son.a);
+      //console.log(son.__proto__);
+      //console.log(p.__proto__);
+      function test(name) {
+        this.name = name;
+        this.say = () => {
+          console.log(this.name);
+        };
+      }
+      let te = new test("谢昆胜");
+      // te.say();
+      Object.prototype.hello = () => {
+        // console.log(this);
+        console.log(this.name);
+      };
+      // te.hello(); //虽然test上没有hello方法，但是，test.prototype.__proto__-->Object.prototype上有方法，所以可以执行。
+      // console.log(te.__proto__.constructor);
+      // console.log(test.prototype.constructor === te.__proto__.constructor);
+      class father {
+        constructor(age, name) {
+          this.age = age;
+          this.name = name;
+          this.sex = "男";
+        }
+        say = function () {
+          console.log(this.name);
+          // console.log(this);
+        };
+      }
+      class GrandFater extends father {
+        //类的继承会继承父类中的属性，如果子类有和父类相同的属性，优先使用本身的属性。
+        constructor(name, age) {
+          super();
+          this.age = age;
+          this.name = name;
+        }
+        song = () => {
+          console.log(`${this.name}喜欢唱小苹果！`);
+        };
+      }
+      let fa = new father(24, "谢昆胜", "男");
+      let grf = new GrandFater("万紫阳", 24);
+      // console.log(grf.name);
+      // console.log(grf.sex);
+      // grf.say();
+
+      class animal {}
+      animal.prototype.say = () => {
+        console.log(this);
+      };
+      let na = new animal();
+      // 注意：如果使用Object.set
+      // Object.setPrototypeOf(GrandFater.prototype, animal.prototype);
+      console.log(
+        father.prototype,
+        GrandFater.prototype
+        // Object.getPrototypeOf(GrandFater.prototype) === father.prototype
+      );
+      console.log;
+      console.log(grf);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let str = "ho335cn12k13b35yvx45z45";
+      let obj = {};
+      let list = []; //list用来存储字符的索引值
+      let lenList = []; //lenlist用来存储长度
+      function sum(str) {
+        let len = str.length;
+        for (let i = 0; i < len; i++) {
+          if (isNaN(Number(str[i]))) {
+            list.push(i); //记录每个字符的位置
+            obj[str[i]] = i; //每个字符的位置的的值
+          }
+        }
+        console.log(str.length);
+        console.log(list.length);
+        for (let j = 0; j < list.length; j++) {
+          if (!list[j + 1] && list[j]) {
+            lenList.push(list[j]);
+          } else {
+            lenList.push(list[j + 1] - list[j]);
+          }
+        }
+      }
+      sum(str);
+      //   console.log(lenList);
+      var i = 0;
+      let objL = {};
+      for (let k in obj) {
+        console.log(k);
+        if (lenList[i] == 1) {
+          objL[k] = "1";
+          i++;
+        } else {
+          objL[k] = str.substr(list[i] + 1, lenList[i++] - 1);
+        }
+      }
+      console.log(objL);
+    </script>
+  </body>
+</html>

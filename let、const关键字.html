@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .father {
+      width: 600px;
+      height: 100px;
+      display: flex;
+      justify-content: space-around;
+    }
+    .father div {
+      flex: 1;
+      /* background-color: royalblue; */
+      border: 1px solid red;
+      margin-right: 10px;
+    }
+  </style>
+  <body>
+    <div class="father">
+      <div class="a">1</div>
+      <div class="a">2</div>
+      <div class="a">3</div>
+    </div>
+    <!-- <button id="btn"></button> -->
+    <script>
+      let divs = document.getElementsByClassName("a");
+      for (let i = 0; i < divs.length; i++) {
+        divs[i].onclick = function (i) {
+          console.log(i);
+          var c = 5;
+          divs[i].style.backgroundColor = "red";
+        };
+      }
+      {
+        var a = 2; //此时可以使用window.a访问到a,但是函数内部使用var定义的变量外部不能访问
+        let b = 3; //let 有块级作用域，外部访问不了
+        const c = 4; //const也存在块级作用域，外部访问不了
+      }
+      //可在函数定义的上方访问函数
+      console.log(sum()); //函数会提升，
+      function sum() {
+        return 3 + 4;
+      }
+      //   console.log(d); //var变量名会提升，但是值访问不到
+      var d = 5;
+      //   暂时性死区
+      function sub() {
+        let e = 6;
+        let c = d - e;
+        let d = 5; //形成暂时性死去区，就是虽然外部定义了d，但是内部定义的d形成了作用域
+        return c;
+      }
+      //   console.log(sub());
+
+      //、不能修改使用const定义的值类型的变量，但是可以修改使用const定义的引用变量的属性值。只要引用变量的地址值没有改变
+      const f = 7;
+      //   f = 8; //报错，不能修改常量的值
+      const arr = ["11", "22", "33"];
+      arr.push("44"); //不会报错，因为地址值没变
+      //   arr = "44"; //报错，此时修改了arr
+      console.log(arr);
+    </script>
+  </body>
+</html>

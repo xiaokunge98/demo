@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>parentNode父节点</title>
+  </head>
+  <body>
+      <div class="list">
+          <ul>
+              <li>x<a href="javascript:;">刪除</a></li>
+              <li>xx<a href="javascript:;">刪除</a></li>
+              <li>xxx<a href="javascript:;">刪除</a></li>
+              <li>xxxx<a href="javascript:;">刪除</a></li>
+              <li>xxxxx<a href="javascript:;">刪除</a></li>
+              <li>xxxxxx<a href="javascript:;">刪除</a></li>
+              <li>xxxxxxx<a href="javascript:;">刪除</a></li>
+              <li>xxxxxxxx<a href="javascript:;">刪除</a></li>
+          </ul>
+      </div>
+  </body>
+  <script type="text/javascript">
+    // parentNode为直接父亲，不管css如何写，parentNode都为最近的父节点
+    var aNode = document.querySelectorAll('.list>ul>li>a')
+    window.onload = function(){
+        for(let i=0;i<aNode.length;i++){
+            aNode[i].onclick = function (){
+               aNode[i].parentNode.style.display = 'none'
+            }
+        }
+    }
+</script>
+</html>

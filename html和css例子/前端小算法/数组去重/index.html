@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1、数组去重遍历
+      let arr = [1, 12, 2, 1, 3, 4, 5, 3, 12];
+      function forTwo(arr) {
+        let len = arr.length;
+        for (let i = 0; i < len; i++) {
+          //完整遍历第一层
+          for (let j = i + 1; j < len; j++) {
+            //遍历第二层除本身和遍历过的项。
+            if (arr[i] == arr[j]) {
+              arr.splice(j, 1);
+            }
+          }
+        }
+      }
+      //   forTwo(arr);
+
+      //2、valueOf去重
+      function quchong1(arr) {
+        let len = arr.length;
+        let list = [];
+        for (let i = 0; i < len; i++) {
+          if (list.indexOf(arr[i]) === -1) {
+            list.push(arr[i]);
+          }
+        }
+        return list;
+      }
+
+      //3、set去重
+      function setReset(arr) {
+        let _list = new Set(arr);
+        return [..._list];
+      }
+      console.log(setReset(arr));
+      //   console.log(Array.from(setReset(arr)));
+    </script>
+  </body>
+</html>

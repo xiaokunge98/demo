@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    div {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: chocolate;
+      margin: auto;
+    }
+  </style>
+  <body>
+    <div></div>
+  </body>
+  <script>
+    window.onload = function () {
+      var div = document.querySelector("div");
+      // 火狐浏览器不支持DOM0中的onmousewheel，需要使用DOM2中的DOMMouseScroll事件
+      if (div.addEventListener) {
+        // 火狐浏览器
+        div.addEventListener("DOMMouseScroll", function (ev) {
+          // 滚轮方向 ev.detail,
+          // ①：上为负值，下滚为正值
+          ev = ev || event;
+          console.log(ev.detail);
+        });
+      }
+      // 其他浏览器
+      div.onmousewheel = function (ev) {
+        // 滚轮方向ev.wheelDelta
+        // ①：向上为正值，向下为负值
+        ev = ev || event;
+        console.log(ev.wheelDelta);
+      };
+    };
+  </script>
+</html>

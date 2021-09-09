@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+        #topDate{
+            display: flex;
+            justify-content: space-around;
+        }
+  </style>
+  <body>
+    <p id="topDate">
+      <span>上一月</span>
+      <span></span>
+      <span>下一月</span>
+    </p>
+    <p id="dateNow">
+        <h4></h4>
+    </p>
+    <script>
+      var dateNow = document.getElementById("dateNow");
+      var topDate = document.getElementById('topDate')
+      function add() {
+        let date = new Date(); //获取当前的时间
+        let cyear = date.getFullYear(); //获取当前的年份
+        let cmonth = date.getMonth();
+        let chouse = date.getHours();
+        let cminutes = date.getMinutes();
+        let ccel = date.getSeconds();
+
+        // dateNow.innerHTML =
+        //   cyear +
+        //   "年" +
+        //   cmonth +
+        //   "月" +
+        //   chouse +
+        //   "时" +
+        //   cminutes +
+        //   "分" +
+        //   ccel +
+        //   "秒";
+        // setInterval(add, 1000);
+      }
+      add();
+    </script>
+  </body>
+</html>

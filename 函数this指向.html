@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 定义一个变量和对象,如果用let函数定义的全局变量会有自己的作用域，使用window. 格式是访问不了的。
+      var x = 1;
+      var obj = {
+        x: 2,
+        objFn: () => {
+          console.log(this.x);
+        },
+      };
+
+      //   obj.objFn(); //对象方法为匿名函数时this指向本身，为箭头函数时this指向window，且箭头函数的this不可变
+      //1、普通函数
+      function fn() {
+        console.log(arguments);
+        console.log(this.x);
+      }
+      //   fn(); //此时指向的this为window ，调用方式可以为window.fn()
+      //   let fnC = fn.bind(window.obj, "a", "b");
+      //   fnC("c"); //改变了this指向,bing在第一次使用传入参数后赋值的实例在fnC中可以继续传入参数
+
+      /**2、构造函数 */
+      function Person(name, age) {
+        this.name = name;
+        this.x = age;
+        this.perFun = function () {
+          console.log(arguments);
+          console.log(this.x);
+          console.log(this);
+        };
+      }
+      var p = new Person("张三", "24");
+      //   p.perFun(); //此时this指向本身,perFun为匿名函数或者箭头函数时都指向本身
+      //   p.perFun.call(obj, "a", "b"); //构造函数中的箭头函数也不可用call、apply，bind等改变
+      //   let p1 = p.perFun.bind(obj);
+      //   p1();
+      /**3、定时器中的匿名函数和箭头函数 */
+      var fun2 = function () {
+        var that = this;
+        window.setTimeout(function () {
+          //定时器中的匿名函数的this指向window，箭头函数指向上一级函数作用域中的this
+          console.log(this);
+        }, 1000);
+      };
+      //   fun2.call(obj);
+    </script>
+  </body>
+</html>

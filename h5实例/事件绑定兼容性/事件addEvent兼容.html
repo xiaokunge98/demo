@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .wrap {
+      width: 200px;
+      height: 200px;
+      background: chocolate;
+    }
+  </style>
+  <body>
+    <div class="wrap"></div>
+  </body>
+  <script>
+    /* 事件绑定（DOM2）
+            事件流：捕获 目标处理 冒泡
+                捕获、冒泡：前提要有嵌套的dom结构才会有
+    */
+    //   IE浏览器8版本以下不支持DOM2中的addEventListener
+    // IE8以下可以使用attachEvent，不过事件需要加on
+    // addEventListener方法有第三个参数修改捕获和冒泡，attachEvent不存在第三个参数
+    window.onload = function () {
+      var div = document.querySelector(".wrap");
+      //   兼容IE8及以下
+      if (div.addEventListener) {
+        div.addEventListener("click", () => {
+          console.log(1, this);
+        });
+        div.addEventListener("click", function () {
+          console.log(2, this);
+        });
+        div.addEventListener("click", () => {
+          console.log(3, this);
+        });
+        // 正常输出123
+      } else {
+        div.attachEvent("onclick", function () {
+          console.log(1);
+        });
+        div.attachEvent("onclick", function () {
+          console.log(2);
+        });
+        div.attachEvent("onclick", function () {
+          console.log(3);
+        });
+        // 低版本倒序输出321
+      }
+    };
+  </script>
+</html>

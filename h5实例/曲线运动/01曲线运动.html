@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .start {
+      width: 10px;
+      height: 10px;
+      background: crimson;
+      position: absolute;
+      top: 400px;
+      left: 300px;
+    }
+    .box {
+      width: 1px;
+      height: 1px;
+      position: absolute;
+      background: black;
+    }
+  </style>
+  <body>
+    <div class="start"></div>
+  </body>
+  <script>
+    window.onload = function () {
+      var startDiv = document.querySelector(".start");
+      //   offsetLeft为当前盒子离视口的左距离
+      var startX = startDiv.offsetLeft;
+      //   offsetTop为当前盒子离视口的上距离
+      var startY = startDiv.offsetTop;
+      var deg = 0; //起始角度
+      var stepX = 50;
+      var stepY = 100;
+      var time;
+      time = setInterval(function () {
+        deg++;
+        startDiv.style.left = startX + ((deg * Math.PI) / 180) * stepX + "px";
+        startDiv.style.top =
+          startY + Math.sin((deg * Math.PI) / 100) * stepY + "px";
+        var boxi = document.createElement("div");
+        boxi.classList.add("box");
+        boxi.style.top = startDiv.offsetTop + "px";
+        boxi.style.left = startDiv.offsetLeft + "px";
+        document.body.appendChild(boxi);
+        if (startDiv.offsetLeft > 1300) {
+          clearInterval(time);
+        }
+      }, 1000 / 60);
+    };
+  </script>
+</html>

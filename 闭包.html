@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>闭包</title>
+  </head>
+  <body>
+    <script>
+      //将函数中的a使用保存起来
+      function closeBack() {
+        let a = 0;
+        console.log(a);
+        closeBack = function () {
+          //將函數closeBack重新赋值给新的函数地址
+          console.log(++a);
+        };
+      }
+      closeBack(); //打印0
+      closeBack(); //打印1
+      //第二个
+      function closeBack1() {
+        let a = 0;
+        return function () {
+          //将a保存在一个函数中
+          console.log(a++);
+        };
+      }
+      let fun = closeBack1();
+      fun();
+      fun();
+    </script>
+  </body>
+</html>

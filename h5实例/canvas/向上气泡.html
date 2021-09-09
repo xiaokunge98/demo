@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: pink;
+    }
+    canvas {
+      width: 400px;
+      height: 400px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      background: white;
+    }
+  </style>
+  <body>
+    <canvas></canvas>
+  </body>
+  <script>
+    window.onload = function () {
+      var cas = document.querySelector("canvas");
+      if (cas.getContext) {
+        var ctx = cas.getContext("2d");
+        var arr = [];
+        setInterval(function () {
+          ctx.clearRect(0, 0, cas.width, cas.height);
+          // 动画
+          for (var j = 0; j < arr.length; j++) {
+            arr[j].deg += 1;
+            arr[j].cirX =
+              arr[j].startX + Math.sin((arr[j].deg * Math.PI) / 100) * 10;
+            arr[j].cirY = arr[j].startY -= ((arr[j].deg * Math.PI) / 180) * 25;
+          }
+          // 绘制
+          for (var i = 0; i < arr.length; i++) {
+            ctx.save();
+            // fillStyle接收的是字符串
+            ctx.fillStyle =
+              "rgba(" +
+              arr[i].red +
+              "," +
+              arr[i].green +
+              "," +
+              arr[i].blue +
+              "," +
+              arr[i].alp +
+              ")";
+            // console.log(ctx.fillStyle);
+            ctx.beginPath();
+            ctx.arc(arr[i].cirX, arr[i].cirY, arr[i].r, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.restore();
+          }
+        }, 1000 / 60);
+        setInterval(function () {
+          // 圆心的位置
+          var cirX = Math.random() * 400;
+          var cirY = Math.random() * 400;
+          var red = Math.round(Math.random() * 255);
+          var green = Math.round(Math.random() * 255);
+          var blue = Math.round(Math.random() * 255);
+          var alp = 1;
+          var r = Math.random() * 4 + 2;
+          var startX = cirX;
+          var startY = cas.height - r;
+          var deg = 0;
+          var step = 10;
+          //   半径
+          arr.push({
+            cirX: cirX,
+            cirY: cirY,
+            r: r,
+            red: red,
+            green: green,
+            blue: blue,
+            alp: alp,
+            startY,
+            startX,
+            step,
+            deg,
+          });
+        }, 1000 / 30);
+      }
+    };
+  </script>
+</html>

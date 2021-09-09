@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      Object.defineProperty(window, "b", {
+        value: "1",
+      });
+      console.log(b);
+      let obj = {
+        a: "1",
+        b: "2",
+        c: "3",
+      };
+      let keyArray = Object.keys(obj); //將对象中的key键放到一个数组中列举出来
+      for (let k in obj) {
+        //遍历对象中的键
+        // console.log(k);
+      }
+      let a = "#";
+      console.log(a.charCodeAt());
+    </script>
+  </body>
+</html>

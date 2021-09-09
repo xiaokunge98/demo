@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>防抖函数</title>
+    <style>
+      .div_container {
+        width: 400px;
+        height: 30px;
+        line-height: 30px;
+        border: 1px solid red;
+      }
+      .div_son {
+        height: 30px;
+        width: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="div_container">
+      <div class="div_son">0%</div>
+    </div>
+    <button onclick="doSet()">安装</button>
+    <script>
+      let divBox = document.querySelector(".div_son");
+      function doSet() {
+        divBox.innerHTML = 0 + "%";
+        let content = divBox.innerHTML.split("%")[0];
+        let timer;
+        let divWidth = 0;
+        if (content < 100) {
+          timer = setInterval(() => {
+            content = Number(content) + 5;
+            divWidth = divWidth + 20;
+            divBox.innerHTML = content + "%";
+            divBox.style.width = divWidth + "px";
+            divBox.style.backgroundColor = "red";
+            if (content >= 100) {
+              clearInterval(timer);
+              divBox.innerHTML = 100 + "%";
+            }
+          }, 500);
+        }
+      }
+    </script>
+  </body>
+</html>
