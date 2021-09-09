@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="wrap">点击</button>
+  </body>
+  <script>
+    var obj1 = {
+      id: 0,
+      name: "熊大",
+      age: 6,
+    };
+    var obj2 = {
+      id: 1,
+      name: "熊二",
+      age: 5,
+      fn: function () {
+        let fn1 = () => {
+          console.log(this);
+          let fn2 = () => {
+            console.log(this);
+          };
+          fn2();
+        };
+        fn1();
+      },
+    };
+    document.getElementById("wrap").addEventListener("click", () => {
+      let a = () => {
+        console.log(this);
+        let b = () => {
+          console.log(this);
+        };
+        b();
+      };
+      a();
+    });
+    obj2.fn.call(obj1);
+  </script>
+</html>
