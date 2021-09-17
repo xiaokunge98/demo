@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    html,
+    body {
+      height: 100%;
+      position: relative;
+      padding: 0px;
+      margin: 0px;
+    }
+    .container {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      top: 50%;
+      left: 50%;
+      overflow: hidden;
+      transform: translate(-50%, -50%);
+    }
+    #imgContainer {
+      width: 800px;
+      overflow: hidden;
+      margin-left: 0px;
+      transition: 1s margin;
+    }
+    img {
+      width: 200px;
+      height: 200px;
+      float: left;
+      /* z-index: 1; */
+    }
+    .spanchild {
+      /* background: chartreuse; */
+      position: absolute;
+      z-index: 99;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-weight: bold;
+      opacity: 0.5;
+    }
+    .active {
+      background-color: blue;
+    }
+    .spanchild span {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      line-height: 20px;
+      cursor: pointer;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div id="imgContainer">
+        <img src="./image/1.jpg" />
+        <img src="./image/2.jpg" />
+        <img src="./image/3.jpg" />
+        <img src="./image/4.jpg" />
+      </div>
+      <div class="spanchild">
+        <span class="active">1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+      </div>
+    </div>
+  </body>
+  <script>
+    window.onload = function () {
+      // 所有的img图片
+      var img = document.getElementsByTagName("img");
+      console.log(img[0].getBoundingClientRect());
+      // 所有的span图片
+      var span = document.getElementsByTagName("span");
+      // 获取装的img盒子的宽度
+      var imgbox = document.getElementById("imgContainer");
+      // 获取最外层盒子
+      var father = document.getElementsByClassName("container")[0];
+      // 一屏的宽度
+      var clientx = document.documentElement.clientWidth;
+      var dpr = clientx / 4;
+      var i = 1;
+      var index = 0;
+      var timer;
+      function spanPosition() {
+        for (let i = 0; i < span.length; i++) {
+          if (index == i) {
+            span[index].classList.add("active");
+          } else {
+            span[i].classList.remove("active");
+          }
+        }
+      }
+      function start() {
+        timer = setInterval(function () {
+          imgbox.style.marginLeft = -i * 200 + "px";
+          index = i;
+          spanPosition();
+          if (i > 2) {
+            i = 0;
+          } else {
+            i++;
+          }
+        }, 2000);
+      }
+      start();
+      father.addEventListener("mouseenter", function () {
+        clearInterval(timer);
+      });
+      father.addEventListener("mouseleave", function () {
+        start();
+      });
+      //鼠标移入span
+      spanmouse();
+      function spanmouse() {
+        for (let j = 0; j < span.length; j++) {
+          span[j].addEventListener("mouseenter", function () {
+            i = j;
+            imgbox.style.marginLeft = -j * 200 + "px";
+            this.classList.add("active");
+            for (let m = 0; m < span.length; m++) {
+              if (m !== j) {
+                span[m].classList.remove("active");
+              }
+            }
+          });
+        }
+      }
+    };
+  </script>
+</html>
